@@ -16,7 +16,6 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem "serviceworker-rails"
 gem 'webpush'
 
 group :development do

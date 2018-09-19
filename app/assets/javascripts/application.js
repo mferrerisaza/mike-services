@@ -1,6 +1,5 @@
 //= require rails-ujs
 //= require_tree .
-//= require serviceworker-companion
 
 // document.querySelector(".btn-btn-primary").addEventListener("click", (event) => {
 //   Notification.requestPermission(function(status) {
