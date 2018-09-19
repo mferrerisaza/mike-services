@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
+      TaskMailer.some_new(@task).deliver_now
       redirect_to tasks_path, notice: "Mike te ayudará en breve"
     else
       redirect_back fallback_location: root_path, alert: "Ha habido un error, llorela o intente nuevamente"
