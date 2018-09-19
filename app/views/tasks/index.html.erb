@@ -1,0 +1,15 @@
+<div class="container">
+  <ul>
+    <% @tasks.each do |task| %>
+      <li><%= task.description %> by: <%= task.user %></li>
+    <% end %>
+  </ul>
+  <br>
+  <%= simple_form_for Task.new, html: { class: "form-inline" } do |f| %>
+    <%= f.input :description %>
+    <%= f.input :user %>
+    <%= f.input :status, as: :hidden, input_html: { value: false } %>
+    <%= f.submit class: "btn btn-danger" %>
+  <% end %>
+  <%= link_to "test", tasks_path, method: "POST", class: "btn btn-primary", remote: true  %>
+</div>
