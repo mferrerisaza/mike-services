@@ -62,8 +62,9 @@
         <%= f.input :user, label: "¿Quién eres?", placeholder: "Ej: El Mike" %>
       </div>
       <div class="col-xs-12">
+        <% text_options = %w[#HelpMeMike #AuuidaMike #TirateUn14Mike #HacemeUnCruceMike] %>
         <%= button_tag type: 'submit', class: "btn order-more-button" do %>
-          #HelpMeMike
+          <%= text_options.sample %>
           <i class="fas fa-medkit"></i>
         <% end %>
       </div>

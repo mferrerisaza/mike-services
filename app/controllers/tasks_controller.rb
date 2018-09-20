@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       TaskMailer.some_new(@task).deliver_now
-      redirect_to tasks_path, notice: "Mike te ayudará en breve"
+      redirect_to root_path, notice: "Mike te ayudará en breve"
     else
       redirect_back fallback_location: root_path, alert: "Ha habido un error, llorela o intente nuevamente"
     end
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to tasks_path
+    redirect_to root_path
   end
 
   private
