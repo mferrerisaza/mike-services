@@ -181,6 +181,8 @@ GEM
     sassc (1.12.1)
       ffi (~> 1.9.6)
       sass (>= 3.3.0)
+    serviceworker-rails (0.5.5)
+      railties (>= 3.1)
     simple_form (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -242,6 +244,7 @@ DEPENDENCIES
   rails (= 5.2.1)
   redis
   sass-rails
+  serviceworker-rails
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
