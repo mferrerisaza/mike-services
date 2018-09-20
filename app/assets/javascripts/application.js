@@ -26,3 +26,4 @@
 //     });
 //   }
 // }
+//= require serviceworker-companion
