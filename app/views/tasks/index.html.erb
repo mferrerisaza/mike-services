@@ -1,8 +1,19 @@
 <div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 150px); height: 100%; margin-bottom: 150px; background-color: whitesmoke;">
-  <h1 class="text-center" style="font-size: 24px; font-weight: bold;"> El Mike Services</h1>
-  <hr>
-  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">Servicios que otros han pedido</h3>
-  <hr>
+  <h1 class="text-center" style="font-size: 24px; font-weight: bold;">
+    El Mike Services
+    <i class="fas fa-copyright"></i>
+  </h1>
+  <p class="text-center" style="font-size: 14px;">Tu plataforma web para pedirle favores al Mike</p>
+    <div class="footer-copyright" style="display: flex; align-items: center; justify-content: space-between;font-size: 10px; text-align: right; margin-bottom: 12px;">
+      <div style="font-size: 12px; width: 100px">
+        <a style="color: #25d366; color: #25d366; border: solid 2px #25d366;border-radius: 8px; padding: 2px 8px;" href="https://wa.me/?text=<%= root_url %>">Compartir <i class="fab fa-whatsapp" style="color: #25d366;"></i></a>
+      </div>
+      <div>
+          Made with <i class="fa fa-heart" style="color: red;"></i> By:<a href="https://www.instagram.com/12_startups/" target="_blank"> Mike @12_startups <i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  <hr style="margin-top: 0px;">
+  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">Servicios que otros han pedido:</h3>
   <% @tasks.each do |task| %>
   <div class="order-news <%= "tachado" if task.status %>" data-id="<%= task.id %>">
     <div class="message">
@@ -13,17 +24,19 @@
             <h3><%= task.user.capitalize %></h3>
           </div>
           <div class="time_ago">
-            <p><%= distance_of_time_in_words(Time.now, task.created_at) %> ago.</p>
+            <p>hace <%= distance_of_time_in_words(Time.now, task.created_at) %>.</p>
           </div>
         </div>
-        <p>Necesita <strong><%= task.description %></strong>.  <i class="em <%= @icons.sample(1)[0].to_s %>"></i> </p>
+        <p>Pidió <strong><%= task.description %></strong>.  <i class="em <%= @icons.sample(1)[0].to_s %>"></i> </p>
       </div>
     </div>
-    <div class="update-action">
-      <%= link_to "Borrar", task_path(task), method: "DELETE", class: "red", data: { confirm: "Seguro?" } %>
-      <% text = task.status ? "Deshacer" : "Completar" %>
-      <%= link_to text, task_path(task), method: "PATCH", remote: true , class: "complete-task-btn" %>
-    </div>
+    <% if current_user %>
+      <div class="update-action">
+        <%= link_to "Borrar", task_path(task), method: "DELETE", class: "red", data: { confirm: "Seguro?" } %>
+        <% text = task.status ? "Deshacer" : "Completar" %>
+        <%= link_to text, task_path(task), method: "PATCH", remote: true , class: "complete-task-btn" %>
+      </div>
+    <% end %>
   </div>
   <% end %>
   <br>
@@ -46,7 +59,7 @@
         <%= f.input :description, label: "¿Qué necesitas?", placeholder: "Ej: Una costeñita" %>
       </div>
       <div class="col-xs-6">
-        <%= f.input :user, label: "¿Quién eres?", placeholder: "Ej: Mike Servicios" %>
+        <%= f.input :user, label: "¿Quién eres?", placeholder: "Ej: El Mike" %>
       </div>
       <div class="col-xs-12">
         <%= button_tag type: 'submit', class: "btn order-more-button" do %>
