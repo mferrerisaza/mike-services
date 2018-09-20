@@ -15,7 +15,7 @@
     </div>
     <% if current_user %>
       <div class="update-action">
-        <%= link_to "Borrar", task_path(task), method: "DELETE", class: "red", data: { confirm: "Seguro?" } %>
+        <%= link_to "Borrar", task_path(task), method: "DELETE", remote: true, class: "red", data: { confirm: "Seguro?" } %>
         <% text = task.status ? "Deshacer" : "Completar" %>
         <%= link_to text, task_path(task), method: "PATCH", remote: true , class: "complete-task-btn" %>
       </div>

@@ -18,7 +18,7 @@ function checkIfCurrentUser(task) {
   if(document.cookie !== "username=guest") {
     html =`
     <div class="update-action">
-      <a class="red" data-confirm="Seguro?" rel="nofollow" data-method="DELETE" href="/tasks/${task.id}">Borrar</a>
+      <a class="red" data-remote="true" data-confirm="Seguro?" rel="nofollow" data-method="DELETE" href="/tasks/${task.id}">Borrar</a>
       <a class="complete-task-btn" data-remote="true" rel="nofollow" data-method="PATCH" href="/tasks/${task.id}">${text}</a>
     </div>
   `
@@ -70,7 +70,7 @@ var DateHelper = {
 
 function feedPhotoOrGeneric(user){
     let url = ""
-    if(["zorro", "foxy", "juan ma", "juan manuel", "juan manuel salazar", "juan m"].includes(user)) {
+    if(["zorro", "foxy", "el zorro", "juan ma", "juan manuel", "juan manuel salazar", "juan m"].includes(user)) {
       url = "mikeservices/zorro.jpg";
     } else if (["rascabel", "rasquitabel", "isabel h", "isa hincapie", "isa h", "isa hincapie"].includes(user)){
       url = "mikeservices/isa_h.jpg";

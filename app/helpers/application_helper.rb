@@ -1,7 +1,7 @@
 module ApplicationHelper
   def feed_photo_or_generic(user)
     url = ""
-    if ["zorro", "foxy", "juan ma", "juan manuel", "juan manuel salazar", "juan m"].include?(user)
+    if ["zorro", "el zorro", "foxy", "juan ma", "juan manuel", "juan manuel salazar", "juan m"].include?(user)
       url = "mikeservices/zorro.jpg"
     elsif ["rascabel", "rasquitabel", "isabel h", "isa hincapie", "isa h", "isa hincapie"].include?(user)
       url = "mikeservices/isa_h.jpg"
