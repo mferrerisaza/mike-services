@@ -31,6 +31,8 @@ module ApplicationHelper
       url = "mikeservices/majo.jpg"
     elsif ["pepe", "pepsi", "cami p", "camila pelaez", "camila", "peperoni", "pepi", "pepeligro", "pepebria", "cami pelaez"].include?(user)
       url = "mikeservices/pespsi.jpg"
+    elsif ["dani", "el dani", "dan", "el dan", "lope de vega", "el socio", "daniel", "dani l", "daniel l", "dani lópez", "daniel lópez", "dani lopez", "daniel lópez"].include?(user)
+      url = "mikeservices/dan.jpg"
     else
       return cl_image_tag "mikeservices/desco.jpg", height: 200, width: 200, crop: :fill, gravity: :face, class: "avatar-large"
     end

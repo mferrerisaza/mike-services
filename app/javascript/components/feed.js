@@ -100,6 +100,8 @@ function feedPhotoOrGeneric(user){
       url = "mikeservices/majo.jpg";
     } else if (["pepe", "pepsi", "cami p", "camila pelaez", "camila", "peperoni", "pepi", "pepeligro", "pepebria", "cami pelaez"].includes(user)){
       url = "mikeservices/pespsi.jpg";
+    } else if (["dani", "el dani", "dan", "el dan", "lope de vega", "el socio", "daniel", "dani l", "daniel l", "dani lópez", "daniel lópez", "dani lopez", "daniel lópez"].includes(user)){
+      url = "mikeservices/dan.jpg"
     } else {
       return cloudinary.image("mikeservices/desco.jpg",{ height: 200, width: 200, crop: "fill", gravity: "face", class: "avatar-large" });
     }
