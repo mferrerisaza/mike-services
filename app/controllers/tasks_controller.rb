@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @icons = Task::ICONS
     if @task.save
-      TaskMailer.some_new(@task).deliver_now
+      TaskMailer.some_new(@task.id).deliver_later
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Mike te ayudará en breve" }
         format.js

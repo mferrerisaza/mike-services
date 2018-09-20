@@ -4,7 +4,8 @@ class TaskMailer < ApplicationMailer
   #
   #   en.task_mailer.new.subject
   #
-  def some_new(task)
-    mail(to: "miguef7@gmail.com", subject: "Nuevo mike servicio-> #{task.user} necesita: #{task.description}" )
+  def some_new(task_id)
+    task = Task.find(task_id)
+    mail(to: user.email, subject: "Nuevo mike servicio-> #{task.user} necesita: #{task.description}" )
   end
 end

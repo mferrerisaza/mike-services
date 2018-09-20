@@ -7,9 +7,9 @@ module ApplicationHelper
       url = "mikeservices/isa_h.jpg"
     elsif ["mike", "ferrer", "migue f", "miguel ferrer", "mike el sobrio", "el etc", "maicol f", "migue ferrer", "mike services"].include?(user)
       url = "mikeservices/mike_f.jpg"
-    elsif ["andy", "el coste", "andres", "coste", "andrés", "andrés sánchez", "andres sanchez", "el faraon"].include?(user)
+    elsif ["andy", "el coste", "andres", "coste", "andrés", "andrés sánchez", "andres sanchez", "el faraon", "el fara", "el servicial sanchez"].include?(user)
       url = "mikeservices/andy.jpg"
-    elsif ["chespo", "santiago g", "santi g", "santi chespo", "santiago chespo", "chespirito", "ches"].include?(user)
+    elsif ["chespo", "santiago g", "santi g", "santi chespo", "santiago chespo", "chespirito", "ches", "chespo servicios"].include?(user)
       url = "mikeservices/chespo.jpg"
     elsif ["londo", "londoño", "santiago londoño", "santi londo", "tetica", "santi l", "santiago l"].include?(user)
       url = "mikeservices/londo.jpg"

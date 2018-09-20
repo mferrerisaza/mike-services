@@ -42,6 +42,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     autoprefixer-rails (9.1.4)
       execjs
@@ -60,6 +62,7 @@ GEM
       rest-client
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.2)
     crass (1.0.4)
     devise (4.5.0)
       bcrypt (~> 3.0)
@@ -87,6 +90,10 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -125,8 +132,11 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
+    public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.5)
+    rack-protection (2.0.4)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -183,6 +193,12 @@ GEM
       sass (>= 3.3.0)
     serviceworker-rails (0.5.5)
       railties (>= 3.1)
+    sidekiq (5.2.2)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
+    sidekiq-failures (1.0.0)
+      sidekiq (>= 4.0.0)
     simple_form (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -235,6 +251,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 5.0.9)
   jbuilder (~> 2.0)
+  letter_opener
   listen (~> 3.0.5)
   mailjet
   pg (~> 0.21)
@@ -245,6 +262,8 @@ DEPENDENCIES
   redis
   sass-rails
   serviceworker-rails
+  sidekiq
+  sidekiq-failures (~> 1.0)
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)

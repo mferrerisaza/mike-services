@@ -76,9 +76,9 @@ function feedPhotoOrGeneric(user){
       url = "mikeservices/isa_h.jpg";
     } else if (["mike", "ferrer", "migue f", "miguel ferrer", "mike el sobrio", "el etc", "maicol f", "migue ferrer", "mike services"].includes(user)){
       url = "mikeservices/mike_f.jpg";
-    } else if (["andy", "el coste", "andres", "coste", "andrés", "andrés sánchez", "andres sanchez", "el faraon"].includes(user)){
+    } else if (["andy", "el coste", "andres", "coste", "andrés", "andrés sánchez", "andres sanchez", "el faraon", "el fara", "el servicial sanchez"].includes(user)){
       url = "mikeservices/andy.jpg";
-    } else if (["chespo", "santiago g", "santi g", "santi chespo", "santiago chespo", "chespirito", "ches"].includes(user)){
+    } else if (["chespo", "santiago g", "santi g", "santi chespo", "santiago chespo", "chespirito", "ches", "chespo servicios"].includes(user)){
       url = "mikeservices/chespo.jpg";
     } else if (["londo", "londoño", "santiago londoño", "santi londo", "tetica", "santi l", "santiago l"].includes(user)){
       url = "mikeservices/londo.jpg";
