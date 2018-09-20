@@ -16,6 +16,20 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find(params[:id])
+    @task.update(status: !@task.status)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to tasks_path
+  end
+
   private
 
   def task_params

@@ -5,7 +5,7 @@ module ApplicationHelper
       url = "mikeservices/zorro.jpg"
     elsif ["rascabel", "rasquitabel", "isabel h", "isa hincapie", "isa h", "isa hincapie"].include?(user)
       url = "mikeservices/isa_h.jpg"
-    elsif ["mike", "ferrer", "migue f", "miguel ferrer", "mike el sobrio", "el etc", "maicol f", "migue ferrer"].include?(user)
+    elsif ["mike", "ferrer", "migue f", "miguel ferrer", "mike el sobrio", "el etc", "maicol f", "migue ferrer", "mike services"].include?(user)
       url = "mikeservices/mike_f.jpg"
     elsif ["andy", "el coste", "andres", "coste", "andrés", "andrés sánchez", "andres sanchez", "el faraon"].include?(user)
       url = "mikeservices/andy.jpg"
