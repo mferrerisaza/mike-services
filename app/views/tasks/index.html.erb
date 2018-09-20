@@ -1,9 +1,4 @@
-<div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 150px); height: 100%; margin-bottom: 150px; background-color: whitesmoke;">
-  <% if current_user %>
-    <%= link_to destroy_user_session_path, method: :delete do %>
-      <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-    <% end %>
-  <% end %>
+<div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 180px); height: 100%; background-color: whitesmoke;">
   <h1 class="text-center" style="font-size: 24px; font-weight: bold;">
     El Mike Services
     <i class="fas fa-copyright"></i>
@@ -42,3 +37,10 @@
     </div>
   </div>
 </div>
+  <div style="margin-bottom: 150px; width: 100%; text-align: right; font-size: 10px; font-weight: bold; padding-right:24px; ">
+    <% if user_signed_in? %>
+      <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <a href="/users/sign_up">¿Quieres ayudar al mike con los favores? Crea una cuenta</a>
+    <% end %>
+  </div>
