@@ -22,7 +22,7 @@
     <div class="update-action">
       <%= link_to "Borrar", task_path(task), method: "DELETE", class: "red", data: { confirm: "Seguro?" } %>
       <% text = task.status ? "Deshacer" : "Completar" %>
-      <%= link_to text, task_path(task), method: "PATCH", remote: true  %>
+      <%= link_to text, task_path(task), method: "PATCH", remote: true , class: "complete-task-btn" %>
     </div>
   </div>
   <% end %>

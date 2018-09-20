@@ -1,6 +1,6 @@
 document.querySelector("div[data-id='<%=@task.id%>']").classList.toggle("tachado");
 if (document.querySelector("div[data-id='<%=@task.id%>']").classList.contains("tachado")){
-  document.querySelector("div[data-id='<%=@task.id%>']").querySelector(".update-action > a").innerText = "Deshacer"
+  document.querySelector("div[data-id='<%=@task.id%>']").querySelector(".complete-task-btn").innerText = "Deshacer"
 } else {
-  document.querySelector("div[data-id='<%=@task.id%>']").querySelector(".update-action > a").innerText = "Completar"
+  document.querySelector("div[data-id='<%=@task.id%>']").querySelector(".complete-task-btn").innerText = "Completar"
 }
