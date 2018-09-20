@@ -4,7 +4,7 @@
   padding: 20px;
   border-bottom: 1px solid rgba(220,224,244,0.4);
   position: relative;
-  padding-bottom: 0px
+  // padding-bottom: 0px
 }
 .update-action{
   text-align: right; font-size: 12px;
@@ -61,6 +61,11 @@
 .message-name h3 {
   font-size: 14px;
   margin: 0px;
+}
+.full_name{
+  h3:first-letter {
+    text-transform: capitalize;
+  }
 }
 .message-name p {
   font-size: 14px;
