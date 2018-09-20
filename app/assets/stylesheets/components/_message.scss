@@ -9,11 +9,13 @@
 .update-action{
   text-align: right; font-size: 12px;
   height: 23px;
-  a.red {
-    background: linear-gradient(to bottom, #E9585A, #EB3349) !important;
-  }
   a {
-    background: linear-gradient(to bottom, #45f842, #197f34);
+    &.red {
+      background: linear-gradient(to bottom, #E9585A, #EB3349) !important;
+    }
+    &.complete-task-btn{
+      background: linear-gradient(to bottom, #45f842, #197f34);
+    }
     color: white;
     padding: 0px 8px;
     border-radius: 20px;
@@ -33,13 +35,15 @@
   text-decoration:line-through;
   background: none;
   box-shadow: none;
-  a {
-    background: none;
-    color: #197f34;
-  .red{
+  a{
+    &.complete-task-btn {
       background: none;
-      color: #EB3349;
+      color: #197f34;
     }
+    &.red{
+        background: none !important;
+        color: #EB3349;
+      }
   }
 }
 .message:first-child {
