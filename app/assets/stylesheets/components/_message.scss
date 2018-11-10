@@ -160,6 +160,29 @@
     text-decoration: none;
   }
 }
+.play-again-button {
+  position: absolute;
+  /* margin: auto auto; */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: white;
+  width: 80%;
+  left: 10%;
+  top: 30%;
+  z-index: -4;
+  font-size: 14px;
+  height: 40px;
+  transition: width .7s,height .1s,border-radius .3s,margin .3s;
+  background: #EB3349;
+  background: linear-gradient(to bottom, #E9585A, #EB3349); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
 .add-btn{
 }
 // .top-dashboard-container-top {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_180420) do
+ActiveRecord::Schema.define(version: 2018_11_09_214523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 2018_09_20_180420) do
     t.string "endpoint"
     t.string "p256dh"
     t.string "auth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playing_cards", force: :cascade do |t|
+    t.string "number"
+    t.string "category"
+    t.string "rule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

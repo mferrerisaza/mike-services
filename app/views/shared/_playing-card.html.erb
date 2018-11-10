@@ -1,0 +1,19 @@
+<style>
+
+</style>
+<%= link_to playing_card_path(playing_card.id), method: :delete, remote: true do  %>
+  <div data-id="<%= playing_card.id %>" class="outline <%= "red" if playing_card.category == "&diams;" || playing_card.category == "&hearts;"%>">
+    <div class="top"><span><%= playing_card.number %></span><span><%== playing_card.category %></span></div>
+    <div class="center">
+      <% if number_of_k == 1 && playing_card.number =="K"  %>
+        <p>LLORELA TOMA EL KOALA (4/4)</p>
+      <% elsif playing_card.number =="K"%>
+        <p><%= playing_card.rule %>(<%=4 - number_of_k + 1%>/4)</p>
+      <% else %>
+        <p><%= playing_card.rule %></p>
+      <% end %>
+      <h1><%== playing_card.category %></h1>
+    </div>
+    <div class="bottom"><span><%== playing_card.category %></span><span><%= playing_card.number %></span></div>
+  </div>
+<% end %>
