@@ -3,6 +3,6 @@ class PlayingCardsController < ApplicationController
 
   def destroy
     @playing_card = PlayingCard.find(params[:id])
-    @playing_card.destroy
+    # @playing_card.destroy
   end
 end

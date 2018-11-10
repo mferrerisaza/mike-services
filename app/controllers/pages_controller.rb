@@ -5,10 +5,9 @@ class PagesController < ApplicationController
   end
 
   def koala
-    PlayingCard.destroy_all
-    create_game
+    create_game if PlayingCard.all.size == 0
     @playing_cards = PlayingCard.all.order('random()')
-    @cover_card= { number: "", category: "&#133;".html_safe, rule: "Click para empezar" }
+    @cover_card = { number: "", category: "&#133;".html_safe, rule: "Click para empezar" }
   end
 
   private
