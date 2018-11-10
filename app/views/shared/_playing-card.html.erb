@@ -1,6 +1,3 @@
-<style>
-
-</style>
 <%= link_to playing_card_path(playing_card.id), method: :delete, remote: true do  %>
   <div data-id="<%= playing_card.id %>" class="outline <%= "red" if playing_card.category == "&diams;" || playing_card.category == "&hearts;"%>">
     <div class="top"><span><%= playing_card.number %></span><span><%== playing_card.category %></span></div>

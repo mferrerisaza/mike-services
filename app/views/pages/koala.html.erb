@@ -2,6 +2,7 @@
   <h1 class="text-center" style="font-size: 24px; font-weight: bold;"> El Popular Koalazo</h1>
   <div class="row">
     <%= link_to "Volver A Jugar", koala_path, class: "btn play-again-button"  %>
+    <%= link_to "Regresar al inicio", root_path, class: "btn go-back-button"  %>
     <% number_of_k = 0 %>
     <% @playing_cards.each do |playing_card| %>
       <% number_of_k += 1 if playing_card.number == "K"%>

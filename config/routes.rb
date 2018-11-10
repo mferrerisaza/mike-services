@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'tasks#index'
+  root to: 'pages#home'
   get '/koala', to: 'pages#koala', as: 'koala'
   resources :tasks
   resources :notifications, defaults: { format: :json }
