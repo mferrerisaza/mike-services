@@ -3,6 +3,11 @@ class PlayersController < ApplicationController
 
   def index
     @teams = Team.all
+    @teams_ready = @teams.all? { |team| team.players.size >= 2 }
+    @papers_round1 = Paper.where(count: 1).where(team: nil)
+    @papers_round2 = Paper.where(count: 2).where(team: nil)
+    @papers_round3 = Paper.where(count: 3).where(team: nil)
+    @users_ready = User.all.all? { |user| user.player && user.player.papers.count === 9}
   end
 
   def create

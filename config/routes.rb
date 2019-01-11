@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :teams, only: [:index, :show, :new, :create]
   resources :players, only: [:index, :create]
   resources :papers, only: [:index, :new, :create, :update]
+  get '/papelitos/reset', to: "papers#reset", as: 'reset_papelitos'
   require "sidekiq/web"
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'

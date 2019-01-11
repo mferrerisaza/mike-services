@@ -37,5 +37,5 @@ function getPlayers() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  getPlayers();
+  // getPlayers();
 })

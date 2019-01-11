@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var rotate = true; //Activate the elements' rotation for each move on stacked cards.
     var items = 3; //Number of visible elements when the stacked options are bottom or top.
     var elementsMargin = 10; //Define the distance of each element when the stacked options are bottom or top.
-    var useOverlays = true; //Enable or disable the overlays for swipe elements.
+    var useOverlays = false; //Enable or disable the overlays for swipe elements.
     var maxElements; //Total of stacked cards on DOM.
     var currentPosition = 0; //Keep the position of active stacked card.
     var velocity = 0.3; //Minimum velocity allowed to trigger a swipe.
@@ -178,25 +178,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
     };
 
     //Functions to swipe top elements on logic external action.
-    function onActionTop() {
-      if(!(currentPosition >= maxElements)){
-        if(useOverlays) {
-          leftObj.classList.remove('no-transition');
-          rightObj.classList.remove('no-transition');
-          topObj.classList.remove('no-transition');
-          topObj.style.zIndex = '8';
-          transformUi(0, 0, 1, topObj);
-        }
+    // function onActionTop() {
+    //   if(!(currentPosition >= maxElements)){
+    //     if(useOverlays) {
+    //       leftObj.classList.remove('no-transition');
+    //       rightObj.classList.remove('no-transition');
+    //       topObj.classList.remove('no-transition');
+    //       topObj.style.zIndex = '8';
+    //       transformUi(0, 0, 1, topObj);
+    //     }
 
-        setTimeout(function(){
-          onSwipeTop();
-          resetOverlays();
-        },300); //wait animations end
-      }
+    //     setTimeout(function(){
+    //       onSwipeTop();
+    //       resetOverlays();
+    //     },300); //wait animations end
+    //   }
+    // };
+
+    const updatePaper = (paperId, teamId) => {
+      fetch(`/papers/${paperId}`, {
+        method: "PATCH",
+        headers: {
+           'Content-Type': 'application/json'
+         },
+        body: JSON.stringify({ paper: { team_id: parseInt(teamId, 10) }  })
+      })
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data);
+        });
     };
 
     //Swipe active card to left.
     function onSwipeLeft() {
+      const paperId = currentElementObj.dataset.paperId
+      const teamId = document.querySelector(".left-action").dataset.teamId
+      updatePaper(paperId, teamId)
+      currentElementObj.classList.add("deleted")
       removeNoTransition();
       transformUi(-1000, 0, 0, currentElementObj);
       if(useOverlays){
@@ -212,6 +230,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     //Swipe active card to right.
     function onSwipeRight() {
+      const paperId = currentElementObj.dataset.paperId
+      const teamId = document.querySelector(".right-action").dataset.teamId
+      updatePaper(paperId, teamId)
+      currentElementObj.classList.add("deleted")
       removeNoTransition();
       transformUi(1000, 0, 0, currentElementObj);
       if(useOverlays){
@@ -227,21 +249,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
     };
 
     //Swipe active card to top.
-    function onSwipeTop() {
-      removeNoTransition();
-      transformUi(0, -1000, 0, currentElementObj);
-      if(useOverlays){
-        transformUi(0, -1000, 0, leftObj); //Move leftOverlay
-        transformUi(0, -1000, 0, rightObj); //Move rightOverlay
-        transformUi(0, -1000, 0, topObj); //Move topOverlay
-        resetOverlays();
-      }
+    // function onSwipeTop() {
+    //   removeNoTransition();
+    //   transformUi(0, -1000, 0, currentElementObj);
+    //   if(useOverlays){
+    //     transformUi(0, -1000, 0, leftObj); //Move leftOverlay
+    //     transformUi(0, -1000, 0, rightObj); //Move rightOverlay
+    //     transformUi(0, -1000, 0, topObj); //Move topOverlay
+    //     resetOverlays();
+    //   }
 
-      currentPosition = currentPosition + 1;
-      updateUi();
-      currentElement();
-      setActiveHidden();
-    };
+    //   currentPosition = currentPosition + 1;
+    //   updateUi();
+    //   currentElement();
+    //   setActiveHidden();
+    // };
 
     //Remove transitions from all elements to be moved in each swipe movement to improve perfomance of stacked cards.
     function removeNoTransition() {
@@ -637,7 +659,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if(translateY < (elementHeight * -1) && translateX > ((listElNodesWidth / 2) * -1) && translateX < (listElNodesWidth / 2)){  //is Top?
 
           if(translateY < (elementHeight * -1) || (Math.abs(translateY) / timeTaken > velocity)){ // Did It Move To Top?
-            onSwipeTop();
+            backToMiddle();
+            // onSwipeTop();
           } else {
             backToMiddle();
           }
@@ -673,12 +696,43 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var buttonRight = document.querySelector('.right-action');
 
     buttonLeft.addEventListener('click', onActionLeft, false);
-    buttonTop.addEventListener('click', onActionTop, false);
+    // buttonTop.addEventListener('click', onActionTop, false);
     buttonRight.addEventListener('click', onActionRight, false);
 
   }
   const cardsContainer = document.querySelector(".stackedcards-container");
   if (cardsContainer) {
     stackedCards();
+    countdown(1);
+    setInterval(countCards, 1000);
   }
 });
+
+function countdown(minutes) {
+    var seconds = 60;
+    var mins = minutes
+    function tick() {
+        //This script expects an element with an ID = "counter". You can change that to what ever you want.
+        var counter = document.getElementById("timer");
+        var current_minutes = mins-1
+        seconds--;
+        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if( seconds > 0 ) {
+            setTimeout(tick, 1000);
+        } else {
+            if(mins > 1){
+                countdown(mins-1);
+            }
+          window.location.replace("/players");
+        }
+    }
+    tick();
+}
+
+function countCards() {
+  let cards = document.querySelectorAll(".card-item:not(.deleted)").length;
+  console.log(cards)
+  if (cards === 0){
+    window.location.replace("/players");
+  }
+}

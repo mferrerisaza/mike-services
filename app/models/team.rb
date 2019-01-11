@@ -3,4 +3,8 @@ class Team < ApplicationRecord
   has_many :players, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
+
+  def points
+    papers.size
+  end
 end

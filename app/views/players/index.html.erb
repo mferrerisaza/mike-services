@@ -13,7 +13,13 @@
       </div>
     </div>
   <hr style="margin-top: 0px;">
-  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">Agrega los jugadores a cada equipo:</h3>
+  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">
+    <% if @teams_ready %>
+      Acá verás los resultados
+    <% else %>
+      Agrega los jugadores a cada equipo:
+    <% end %>
+</h3>
   <style>
     input, input::placeholder, select {
       font-size: 12px !important;
@@ -24,17 +30,23 @@
     }
   </style>
   <% @teams.each do |team| %>
-    <h3 class="text-center" style="font-size: 16px; font-weight: bold;"><%= team.name %></h3>
+    <h3 class="text-center" style="font-size: 16px; font-weight: bold;"><%= team.name %><%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %></h3>
     <ul>
       <% team.players.each do |player| %>
-        <li data-player-id = "<%= player.id %>"><%= player.nickname %> <%= player.papers.size / 3 %>/3</li>
+        <li data-player-id = "<%= player.id %>">
+          <%= player.nickname %>
+          <% if player.ready_to_play? %>
+            <i class="em em-white_check_mark"></i>
+          <% else %>
+            <i class="em em-x"></i>
+          <% end %>
+        </li>
       <% end %>
     </ul>
   <% end %>
 </div>
-  <div footer navbar-fixed-bottom text-center" style="background-color: white; padding: 16px;box-shadow: 0px 0px 1em rgba(0,0,0,0.1); } ">
+  <div class="footer navbar-fixed-bottom text-center" style="background-color: white; padding: 16px;box-shadow: 0px 0px 1em rgba(0,0,0,0.1); } ">
     <div class="row">
-
       <% if current_user.player.nil? %>
         <%= simple_form_for(Player.new) do |f| %>
           <div class="col-xs-6">
@@ -47,10 +59,20 @@
           <%= f.submit "Agregar", class: "btn order-more-button" %>
           </div>
         <% end %>
-      <% elsif current_user.player %>
-        <%= link_to "Continuar", new_paper_path, class: "btn order-more-button"  %>
-      <% elsif current_user.player.papers.count === 9 %>
-        <%= link_to "Comenzar Partida", papers_path, class: "btn order-more-button"  %>
+      <% elsif @users_ready  && @papers_round1.size > 0 && @teams_ready %>
+        <%= link_to "Ronda 1: Describir", papers_path(count: 1), class: "btn order-more-button"  %>
+      <% elsif @users_ready  && @papers_round2.size > 0 && @teams_ready %>
+        <%= link_to "Ronda 2: Dramatizar", papers_path(count: 2), class: "btn order-more-button"  %>
+      <% elsif @users_ready  && @papers_round3.size > 0 && @teams_ready %>
+        <%= link_to "Ronda 3: Solo 1 Palabra", papers_path(count: 3), class: "btn order-more-button"  %>
+      <% elsif current_user.player && current_user.player.papers.size == 0 %>
+        <%= link_to "Agregar Papelitos", new_paper_path, class: "btn order-more-button"  %>
+      <% elsif Paper.where(team: nil).size == 0 %>
+        <%= link_to "Nueva partida", reset_papelitos_path, class: "btn order-more-button" %>
+      <% else %>
+      <div class="alert alert-warning" role="alert">
+        Faltan Jugadores para esta partida
+      </div>
       <% end %>
     </div>
   </div>

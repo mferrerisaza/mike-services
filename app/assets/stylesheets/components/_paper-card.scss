@@ -79,7 +79,7 @@
     left: 0;
     opacity: 0;
     top: 0;
-    height: 100%;
+    height: 300px;
     font-size: 24px; /* this style was added only for better preview */
     text-transform: uppercase; /* this style was added only for better preview */
     font-weight: 500; /* this style was added only for better preview */
@@ -146,7 +146,7 @@
 .left-action {
     width: 100%;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 20px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -170,4 +170,11 @@
 .left-action { background: #E58D93; }
 
 /* elements on stacked cards */
-.card-item { background: #FFFFFF; }
+.card-item {
+  background: #FFFFFF;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  text-transform: uppercase;
+}
