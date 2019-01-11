@@ -1,0 +1,27 @@
+<div class="my-contaienr" style="min-height: 100vh; overflow-x: hidden; font-family: 'Open Sans'; font-size: 12px; background: #BFC7D0; padding: 10%;">
+  <div id="stacked-cards-block" class="stackedcards stackedcards--animatable init">
+    <div class="stackedcards-container">
+      <div class="card-item">Describe</div>
+      <% @papers_round_1.each do |paper| %>
+        <div class="card-item"><%= paper.description %></div>
+      <% end %>
+      <div class="card-item">Dramatiza</div>
+      <% @papers_round_2.each do |paper| %>
+        <div class="card-item"><%= paper.description %></div>
+      <% end %>
+      <div class="card-item">Una Sola Palabra</div>
+      <% @papers_round_3.each do |paper| %>
+        <div class="card-item"><%= paper.description %></div>
+      <% end %>
+    </div>
+    <div class="stackedcards--animatable stackedcards-overlay top">TOP</div>
+    <div class="stackedcards--animatable stackedcards-overlay right">RIGHT</div>
+    <div class="stackedcards--animatable stackedcards-overlay left">LEFT</div>
+  </div>
+  <div class="global-actions">
+    <div class="left-action">Left</div>
+    <div class="top-action">Top</div>
+    <div class="right-action">Right</div>
+  </div>
+  <p><%= Player.find_by(user: current_user).nickname %></p>
+</div>

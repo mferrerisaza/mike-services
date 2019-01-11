@@ -152,10 +152,11 @@ function fetchData(){
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const taksBtn = document.querySelector(".order-more-button")
-  if (taksBtn) {
+  const taksBtn = document.querySelector(".order-more-button");
+  const cardsContainer = document.querySelector(".cards-container");
+  if (taksBtn && cardsContainer) {
     fetchData();
-  window.setInterval(fetchData, 1000);
+    window.setInterval(fetchData, 1000);
   }
 })
 

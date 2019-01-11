@@ -1,0 +1,56 @@
+<div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 180px); height: 100%; background-color: whitesmoke;">
+  <h1 class="text-center" style="font-size: 24px; font-weight: bold;">
+    El Mike Services
+    <i class="fas fa-copyright"></i>
+  </h1>
+  <p class="text-center" style="font-size: 14px;">La plataforma web del entretenimiento</p>
+    <div class="footer-copyright" style="display: flex; align-items: center; justify-content: space-between;font-size: 10px; text-align: right; margin-bottom: 12px;">
+      <div style="font-size: 12px; width: 100px">
+        <a style="color: #25d366; color: #25d366; border: solid 2px #25d366;border-radius: 8px; padding: 2px 8px;" href="https://wa.me/?text=<%= root_url %>">Compartir <i class="fab fa-whatsapp" style="color: #25d366;"></i></a>
+      </div>
+      <div>
+          Made with <i class="fa fa-heart" style="color: red;"></i> By:<a href="https://www.instagram.com/12_startups/" target="_blank"> Mike @12_startups <i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  <hr style="margin-top: 0px;">
+  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">Agrega los jugadores a cada equipo:</h3>
+  <style>
+    input, input::placeholder, select {
+      font-size: 12px !important;
+      text-align: center;
+    }
+    input, select {
+      border-radius: 25px !important;
+    }
+  </style>
+  <% @teams.each do |team| %>
+    <h3 class="text-center" style="font-size: 16px; font-weight: bold;"><%= team.name %></h3>
+    <ul>
+      <% team.players.each do |player| %>
+        <li data-player-id = "<%= player.id %>"><%= player.nickname %> <%= player.papers.size / 3 %>/3</li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+  <div footer navbar-fixed-bottom text-center" style="background-color: white; padding: 16px;box-shadow: 0px 0px 1em rgba(0,0,0,0.1); } ">
+    <div class="row">
+
+      <% if current_user.player.nil? %>
+        <%= simple_form_for(Player.new) do |f| %>
+          <div class="col-xs-6">
+            <%=f.input :nickname %>
+          </div>
+          <div class="col-xs-6">
+            <%= f.association :team %>
+          </div>
+          <div class="col-xs-12">
+          <%= f.submit "Agregar", class: "btn order-more-button" %>
+          </div>
+        <% end %>
+      <% elsif current_user.player %>
+        <%= link_to "Continuar", new_paper_path, class: "btn order-more-button"  %>
+      <% elsif current_user.player.papers.count === 9 %>
+        <%= link_to "Comenzar Partida", papers_path, class: "btn order-more-button"  %>
+      <% end %>
+    </div>
+  </div>

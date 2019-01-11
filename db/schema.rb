@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_214523) do
+ActiveRecord::Schema.define(version: 2018_12_08_192424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,28 @@ ActiveRecord::Schema.define(version: 2018_11_09_214523) do
     t.string "auth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "papers", force: :cascade do |t|
+    t.string "description"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "player_id"
+    t.integer "count", default: 3
+    t.index ["player_id"], name: "index_papers_on_player_id"
+    t.index ["team_id"], name: "index_papers_on_team_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "nickname"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.integer "played_rounds", default: 0
+    t.index ["team_id"], name: "index_players_on_team_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "playing_cards", force: :cascade do |t|
@@ -40,6 +62,12 @@ ActiveRecord::Schema.define(version: 2018_11_09_214523) do
     t.integer "amount", default: 1
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -53,4 +81,8 @@ ActiveRecord::Schema.define(version: 2018_11_09_214523) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "papers", "players"
+  add_foreign_key "papers", "teams"
+  add_foreign_key "players", "teams"
+  add_foreign_key "players", "users"
 end

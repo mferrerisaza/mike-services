@@ -1,0 +1,42 @@
+<div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 180px); height: 100%; background-color: whitesmoke;">
+  <h1 class="text-center" style="font-size: 24px; font-weight: bold;">
+    El Mike Services
+    <i class="fas fa-copyright"></i>
+  </h1>
+  <p class="text-center" style="font-size: 14px;">La plataforma web del entretenimiento</p>
+    <div class="footer-copyright" style="display: flex; align-items: center; justify-content: space-between;font-size: 10px; text-align: right; margin-bottom: 12px;">
+      <div style="font-size: 12px; width: 100px">
+        <a style="color: #25d366; color: #25d366; border: solid 2px #25d366;border-radius: 8px; padding: 2px 8px;" href="https://wa.me/?text=<%= root_url %>">Compartir <i class="fab fa-whatsapp" style="color: #25d366;"></i></a>
+      </div>
+      <div>
+          Made with <i class="fa fa-heart" style="color: red;"></i> By:<a href="https://www.instagram.com/12_startups/" target="_blank"> Mike @12_startups <i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  <hr style="margin-top: 0px;">
+  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">Crea los papelitos:</h3>
+  <style>
+    input, input::placeholder {
+      font-size: 12px;
+      text-align: center;
+    }
+    input {
+      border-radius: 25px !important;
+    }
+  </style>
+  <%= form_with model: Paper.new, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :paper_1, "Papelito 1" %>
+    <%= f.text_field :paper_1, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :paper_2, "Papelito 2" %>
+    <%= f.text_field :paper_2, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :paper_3, "Papelito 3" %>
+    <%= f.text_field :paper_3, class: "form-control" %>
+  </div>
+    <%= f.submit "Crear papelitos", class: "btn order-more-button" %>
+  <% end %>
+</div>
+
