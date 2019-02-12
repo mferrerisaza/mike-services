@@ -7,14 +7,16 @@ class PlayersController < ApplicationController
     @papers_round1 = Paper.where(count: 1).where(team: nil)
     @papers_round2 = Paper.where(count: 2).where(team: nil)
     @papers_round3 = Paper.where(count: 3).where(team: nil)
-    @users_ready = User.all.all? { |user| user.player && user.player.ready_to_play? }
+    @current_player = Player.find(session[:player]["id"]) if session[:player]
+    @users_ready = Player.all.all?(&:ready_to_play?)
   end
 
   def create
     @player = Player.new(player_params)
-    @player.user = current_user
+    # @player.user = current_user
     if @player.save
       redirect_to players_path
+      session[:player] = @player
     else
       @teams = Team.all
       render 'index'

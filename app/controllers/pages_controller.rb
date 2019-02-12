@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, except: :papelitos
+  skip_before_action :authenticate_user!
 
   def home
   end
@@ -11,6 +11,7 @@ class PagesController < ApplicationController
   end
 
   def papelitos
+    session[:player] = nil
     path = ""
     unless Team.all.size == 2
       path = new_team_path

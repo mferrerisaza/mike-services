@@ -12,8 +12,14 @@
           Made with <i class="fa fa-heart" style="color: red;"></i> By:<a href="https://www.instagram.com/12_startups/" target="_blank"> Mike @12_startups <i class="fab fa-instagram"></i></a>
       </div>
     </div>
-  <hr style="margin-top: 0px;">
-  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">
+  <hr style="margin-top: 0px; margin-bottom: 8px;">
+    <%= link_to reset_papelitos_path do  %>
+      <div style="text-align: right; font-size: 12px;">
+        Reiniciar
+        <i class="fas fa-redo"></i>
+      </div>
+    <% end %>
+  <h3 class="text-center" style="font-size: 16px; font-weight: lighter; margin-top: 8px; ">
     <% if @teams_ready %>
       Acá verás los resultados
     <% else %>
@@ -29,27 +35,31 @@
       border-radius: 25px !important;
     }
   </style>
-  <div style="margin-bottom: 164px;">
+  <div style="margin-bottom: 164px; display: flex; justify-content: space-between;">
     <% @teams.each do |team| %>
-      <h3 class="text-center" style="font-size: 16px; font-weight: bold;"><%= team.name %><%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %></h3>
-      <ul>
-        <% team.players.each do |player| %>
-          <li data-player-id = "<%= player.id %>">
-            <%= player.nickname %>
-            <% if player.ready_to_play? %>
-              <i class="em em-white_check_mark"></i>
-            <% else %>
-              <i class="em em-x"></i>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
+    <div style="min-width: 50%; max-width: 50%;">
+        <h3 class="text-center" style="font-size: 16px; font-weight: bold;"><%= team.name %>
+        </h3>
+        <h3 class="text-center" style="font-size: 16px; font-weight: bold; margin-top: 0px;"><%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %></h3>
+        <ul class="list-group list-group-flush" style="font-size: 13px;">
+          <% team.players.each do |player| %>
+            <li data-player-id = "<%= player.id %>" class="list-group-item" style="display: flex; justify-content: space-between; word-break: break-word;">
+              <%= player.nickname %>
+              <% if player.ready_to_play? %>
+                <i class="em em-white_check_mark"></i>
+              <% else %>
+                <i class="em em-x"></i>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+    </div>
     <% end %>
   </div>
 </div>
   <div class="footer navbar-fixed-bottom text-center" style="background-color: white; padding: 16px;box-shadow: 0px 0px 1em rgba(0,0,0,0.1); } ">
     <div class="row">
-      <% if current_user.player.nil? %>
+      <% if session[:player].nil? %>
         <%= simple_form_for(Player.new) do |f| %>
           <div class="col-xs-6">
             <%=f.input :nickname %>
@@ -67,7 +77,7 @@
         <%= link_to "Ronda 2: Dramatizar", papers_path(count: 2), class: "btn order-more-button"  %>
       <% elsif @users_ready  && @papers_round3.size > 0 && @teams_ready %>
         <%= link_to "Ronda 3: Solo 1 Palabra", papers_path(count: 3), class: "btn order-more-button"  %>
-      <% elsif current_user.player && current_user.player.papers.size == 0 %>
+      <% elsif @current_player && @current_player.papers.size == 0 %>
         <%= link_to "Agregar Papelitos", new_paper_path, class: "btn order-more-button"  %>
       <% elsif Paper.where(team: nil).size == 0 %>
         <%= link_to "Nueva partida", reset_papelitos_path, class: "btn order-more-button" %>

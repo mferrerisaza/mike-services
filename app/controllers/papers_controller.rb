@@ -1,4 +1,5 @@
 class PapersController < ApplicationController
+  skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token, only: :update
 
   def index
@@ -11,11 +12,12 @@ class PapersController < ApplicationController
   end
 
   def create
+    player = Player.find(session[:player]["id"])
     rounds = [1, 2, 3]
     rounds.each do |round|
-      Paper.create(description: params[:paper][:paper_1], player: current_user.player, count: round)
-      Paper.create(description: params[:paper][:paper_2], player: current_user.player, count: round)
-      Paper.create(description: params[:paper][:paper_3], player: current_user.player, count: round)
+      Paper.create(description: params[:paper][:paper_1], player: player, count: round)
+      Paper.create(description: params[:paper][:paper_2], player: player, count: round)
+      Paper.create(description: params[:paper][:paper_3], player: player, count: round)
     end
     redirect_to players_path
   end
@@ -27,6 +29,7 @@ class PapersController < ApplicationController
   end
 
   def reset
+    session[:player] = nil
     Team.destroy_all
     Player.destroy_all
     redirect_to papelitos_path

@@ -1,6 +1,6 @@
 class Player < ApplicationRecord
   belongs_to :team
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :papers, dependent: :destroy
 
   def papers_size
