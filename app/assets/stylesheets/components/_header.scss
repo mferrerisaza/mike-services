@@ -1,0 +1,29 @@
+.header-copyright {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  text-align: right;
+  margin-bottom: 12px;
+  .header-copyright-share-whatsapp {
+    font-size: 12px;
+    width: 100px;
+    a {
+      color: #25d366;
+      border: solid 2px #25d366;
+      border-radius: 8px;
+      padding: 2px 8px;
+    }
+    .fab.fa-whatsapp {
+      color: #25d366;
+    }
+  }
+  .header-copyright-made-by{
+    .fa.fa-heart {
+      color: red;
+    }
+  }
+}
+.header-separator {
+  margin-top: 0px;
+}
