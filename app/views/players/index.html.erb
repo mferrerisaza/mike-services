@@ -1,49 +1,30 @@
-<div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 180px); height: 100%; background-color: whitesmoke;">
-  <h1 class="text-center" style="font-size: 24px; font-weight: bold;">
-    <%= link_to "El Mike Services", root_path  %>
-    <i class="fas fa-copyright"></i>
-  </h1>
-  <p class="text-center" style="font-size: 14px;">La plataforma web del entretenimiento</p>
-    <div class="footer-copyright" style="display: flex; align-items: center; justify-content: space-between;font-size: 10px; text-align: right; margin-bottom: 12px;">
-      <div style="font-size: 12px; width: 100px">
-        <a style="color: #25d366; color: #25d366; border: solid 2px #25d366;border-radius: 8px; padding: 2px 8px;" href="https://wa.me/?text=<%= root_url %>">Compartir <i class="fab fa-whatsapp" style="color: #25d366;"></i></a>
-      </div>
-      <div>
-          Made with <i class="fa fa-heart" style="color: red;"></i> By:<a href="https://www.instagram.com/12_startups/" target="_blank"> Mike @12_startups <i class="fab fa-instagram"></i></a>
-      </div>
+<div class="container wrapper">
+  <%= render 'shared/header', complementary_text: "del entretenimiento" %>
+  <%= link_to reset_papelitos_path do  %>
+    <div class="text-right font-size-12 restart-btn">
+      Reiniciar
+      <i class="fas fa-redo"></i>
     </div>
-  <hr style="margin-top: 0px; margin-bottom: 8px;">
-    <%= link_to reset_papelitos_path do  %>
-      <div style="text-align: right; font-size: 12px;">
-        Reiniciar
-        <i class="fas fa-redo"></i>
-      </div>
-    <% end %>
-  <h3 class="text-center" style="font-size: 16px; font-weight: lighter; margin-top: 8px; ">
+  <% end %>
+  <h3 class="text-center font-size-16 font-lighter mt-8">
     <% if @teams_ready %>
       Acá verás los resultados
     <% else %>
       Agrega los jugadores a cada equipo:
     <% end %>
   </h3>
-  <style>
-    input, input::placeholder, select {
-      font-size: 12px !important;
-      text-align: center;
-    }
-    input, select {
-      border-radius: 25px !important;
-    }
-  </style>
-  <div style="margin-bottom: 164px; display: flex; justify-content: space-between;">
+  <div class="team-cards-container">
     <% @teams.each do |team| %>
-    <div style="min-width: 50%; max-width: 50%;">
-        <h3 class="text-center" style="font-size: 16px; font-weight: bold;"><%= team.name %>
+    <div class="team-card">
+        <h3 class="text-center font-size-16 font-bold"><%= team.name %></h3>
+        <h3 class="text-center font-size-16 font-bold mt-0">
+          <%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %>
         </h3>
-        <h3 class="text-center" style="font-size: 16px; font-weight: bold; margin-top: 0px;"><%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %></h3>
-        <ul class="list-group list-group-flush" style="font-size: 13px;">
+        <ul class="list-group list-group-flush font-size-13">
           <% team.players.each do |player| %>
-            <li data-player-id = "<%= player.id %>" class="list-group-item" style="display: flex; justify-content: space-between; word-break: break-word;">
+            <li data-player-id ="<%= player.id %>"
+                class="list-group-item"
+            >
               <%= player.nickname %>
               <% if player.ready_to_play? %>
                 <i class="em em-white_check_mark"></i>
@@ -57,7 +38,7 @@
     <% end %>
   </div>
 </div>
-  <div class="footer navbar-fixed-bottom text-center" style="background-color: white; padding: 16px;box-shadow: 0px 0px 1em rgba(0,0,0,0.1); } ">
+  <div class="footer navbar-fixed-bottom text-center">
     <div class="row">
       <% if session[:player].nil? %>
         <%= simple_form_for(Player.new) do |f| %>

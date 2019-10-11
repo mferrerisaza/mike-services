@@ -1,46 +1,22 @@
-<div class="container" style="color: rgba(0,0,0,0.6); min-height: calc(100vh - 180px); height: 100%; background-color: whitesmoke;">
-  <h1 class="text-center" style="font-size: 24px; font-weight: bold;">
-    <%= link_to "El Mike Services", root_path  %>
-    <i class="fas fa-copyright"></i>
-  </h1>
-  <p class="text-center" style="font-size: 14px;">Tu plataforma web para pedirle favores al Mike</p>
-    <div class="footer-copyright" style="display: flex; align-items: center; justify-content: space-between;font-size: 10px; text-align: right; margin-bottom: 12px;">
-      <div style="font-size: 12px; width: 100px">
-        <a style="color: #25d366; color: #25d366; border: solid 2px #25d366;border-radius: 8px; padding: 2px 8px;" href="https://wa.me/?text=<%= root_url %>">Compartir <i class="fab fa-whatsapp" style="color: #25d366;"></i></a>
-      </div>
-      <div>
-          Made with <i class="fa fa-heart" style="color: red;"></i> By:<a href="https://www.instagram.com/12_startups/" target="_blank"> Mike @12_startups <i class="fab fa-instagram"></i></a>
-      </div>
-    </div>
-  <hr style="margin-top: 0px;">
-  <h3 class="text-center" style="font-size: 16px; font-weight: lighter;">Servicios que otros han pedido:</h3>
+<div class="container wrapper">
+  <%= render 'shared/header', complementary_text: "para pedirle favores al Mike" %>
+  <h3 class="text-center font-size-16 font-lighter">Servicios que otros han pedido:</h3>
   <div class="cards-container">
     <% @tasks.each do |task| %>
       <%= render 'shared/task-card', task: task %>
     <% end %>
   </div>
   <br>
-  <div class="footer navbar-fixed-bottom text-center" style="background-color: white; padding: 16px;box-shadow: 0px 0px 1em rgba(0,0,0,0.1); }">
-    <style>
-      input, input::placeholder {
-        font-size: 12px;
-        text-align: center;
-      }
-      input {
-        border-radius: 25px !important;
-      }
-    </style>
-    <div class="row"
-    style="
-    font-size: 12px !important;">
+  <div class="footer navbar-fixed-bottom text-center">
+    <div class="row">
       <%= render 'shared/task-form', task: @task %>
     </div>
   </div>
 </div>
-  <div style="margin-bottom: 150px; width: 100%; text-align: right; font-size: 10px; font-weight: bold; padding-right:24px; ">
-    <% if user_signed_in? %>
-      <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <a href="/users/sign_up">¿Quieres ayudar al mike con los favores? Crea una cuenta</a>
-    <% end %>
-  </div>
+<div class="bottom-actions">
+  <% if user_signed_in? %>
+    <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <a href="/users/sign_up">¿Quieres ayudar al mike con los favores? Crea una cuenta</a>
+  <% end %>
+</div>

@@ -1,12 +1,11 @@
-/* Stacked Cards component css */
-// body {
-//   overflow-x: hidden;
-//   font-family: "Open Sans";
-//   font-size: 12px;
-//   background: #BFC7D0;
-//   padding: 10%;
-// }
-
+.paper-cards-container {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Open Sans';
+  font-size: 12px;
+  background: #dedada;
+  padding: 10%;
+}
 .no-transition {
   -webkit-transition: none ! important;
   -o-transition: none ! important;

@@ -1,0 +1,14 @@
+.team-cards-container {
+  margin-bottom: 164px;
+  display: flex;
+  justify-content: space-between;
+  .team-card {
+    min-width: 50%;
+    max-width: 50%;
+  }
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    word-break: break-word;
+  }
+}
