@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+
   devise_for :users
-  root to: 'pages#home'
   get '/koala', to: 'pages#koala', as: 'koala'
   get '/papelitos', to: 'pages#papelitos', as: 'papelitos'
   resources :tasks
@@ -14,4 +14,8 @@ Rails.application.routes.draw do
     authenticate :user, lambda { |u| u.admin } do
       mount Sidekiq::Web => '/sidekiq'
     end
+  get '/service-worker.js', to: "service_worker#service_worker"
+  get '/manifest.json', to: "service_worker#manifest"
+  get '/offline.html', to: "service_worker#offline"
+  root to: 'pages#home'
 end

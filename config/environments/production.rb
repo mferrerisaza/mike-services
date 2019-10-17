@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: "emikeservices.scuad.co" }
+  config.action_mailer.default_url_options = { host: "mikeservices.scuad.co" }
   config.webpacker.check_yarn_integrity = false
   # Settings specified here will take precedence over those in config/application.rb.
 
