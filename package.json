@@ -2,6 +2,7 @@
   "name": "mike-services",
   "private": true,
   "dependencies": {
+    "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^4.0.7",
     "bootstrap": "3",
     "cloudinary": "^1.11.0",
