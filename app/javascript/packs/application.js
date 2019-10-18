@@ -2,7 +2,6 @@ require("@rails/ujs").start()
 require("channels")
 
 import "bootstrap";
-import "../components/feed.js"
 import "../components/papelitos.js"
 import "../components/playerTurn.js"
 import "controllers"
@@ -16,3 +15,4 @@ if (navigator.serviceWorker) {
     });
 }
 
+Notification.requestPermission().then((result) => {})
