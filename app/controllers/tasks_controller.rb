@@ -16,6 +16,12 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @icons = Task::ICONS
     if @task.save
+      html = ApplicationController.render(
+          partial: 'shared/task-card',
+          assigns: { icons: @icons },
+          locals: { task: @task, current_user: current_user }
+      ).squish
+      ActionCable.server.broadcast "task", { task: html }
       TaskMailer.some_new(@task.id).deliver_later
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Mike te ayudará en breve" }

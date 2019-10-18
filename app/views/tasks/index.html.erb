@@ -1,7 +1,7 @@
 <div class="container wrapper">
   <%= render 'shared/header', complementary_text: "para pedirle favores al Mike" %>
   <h3 class="text-center font-size-16 font-lighter">Servicios que otros han pedido:</h3>
-  <div class="cards-container">
+  <div class="cards-container" data-controller="tasks" >
     <% @tasks.each do |task| %>
       <%= render 'shared/task-card', task: task %>
     <% end %>

@@ -1,4 +1,4 @@
-<div class="order-news <%= "tachado" if task.status %>" data-id="<%= task.id %>">
+<div class="order-news <%= "tachado" if task.status %>" data-id="<%= task.id %>" data-channel="task" data-target="tasks.task">
     <div class="message">
       <%= feed_photo_or_generic(task.user.downcase) %>
       <div class="message-name">
