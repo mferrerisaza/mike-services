@@ -12,6 +12,7 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="current-user" id="<%= current_user.try(:id) %>" />
   </head>
   <body>
     <%= render 'shared/flashes' %>

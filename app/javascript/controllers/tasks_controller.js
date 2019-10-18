@@ -1,19 +1,28 @@
 import { Controller } from "stimulus"
-import createChannel from "cables/cable";
+import consumer from "../channels/consumer"
 
 export default class extends Controller {
   static targets = [ "task" ]
 
   connect() {
-    this.tasksChannel = createChannel( "TaskChannel", {
+    let tasksController = this;
+
+    this.subscription = consumer.subscriptions.create("TaskChannel", {
       connected() {
-        console.log("conected");
       },
-      received(data) {
-        console.log(data);
+      received( { task } ) {
+        tasksController.renderTask(task);
       }
-
-
     });
   }
+
+  disconnect() {
+    this.subscription.unsubscribe();
+  }
+
+  renderTask(taskHtml) {
+    this.element.insertAdjacentHTML("afterbegin", taskHtml)
+    // this.element.scrollIntoView();
+  }
+
 }
