@@ -12,11 +12,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @tasks = Task.all.order(id: :desc)
     @task = Task.new(task_params)
     @icons = Task::ICONS
     if @task.save
-      TaskMailer.some_new(@task.id).deliver_later
       respond_to do |format|
         format.html { redirect_to root_path, notice: "Mike te ayudará en breve" }
         format.js
@@ -32,9 +30,6 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.update(status: !@task.status)
-    respond_to do |format|
-      format.js
-    end
   end
 
   def destroy

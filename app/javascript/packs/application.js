@@ -1,9 +1,11 @@
+require("@rails/ujs").start()
+require("channels")
+
 import "bootstrap";
-import "../components/feed.js"
 import "../components/papelitos.js"
 import "../components/playerTurn.js"
+import "controllers"
 
-require("@rails/ujs").start()
 
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/service-worker.js', { scope: './' })
@@ -12,3 +14,5 @@ if (navigator.serviceWorker) {
       console.log(reg);
     });
 }
+
+Notification.requestPermission().then((result) => {})
