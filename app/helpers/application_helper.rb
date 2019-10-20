@@ -34,8 +34,8 @@ module ApplicationHelper
     elsif ["dani", "el dani", "dan", "el dan", "lope de vega", "el socio", "daniel", "dani l", "daniel l", "dani lópez", "daniel lópez", "dani lopez", "daniel lópez"].include?(user)
       url = "mikeservices/dan.jpg"
     else
-      return cl_image_tag "mikeservices/desco.jpg", height: 200, width: 200, crop: :fill, gravity: :face, class: "avatar-large"
+      return cl_image_tag "mikeservices/desco.jpg", height: 200, width: 200, crop: :fill, gravity: :face, secure: true, class: "avatar-large"
     end
-      return cl_image_tag url, height: 300, width: 300, crop: :fill,gravity: :face, class: "avatar-large"
+      return cl_image_tag url, height: 300, width: 300, crop: :fill,gravity: :face, secure: true, class: "avatar-large"
   end
 end

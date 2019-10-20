@@ -8,17 +8,13 @@ export default class extends Controller {
     let tasksController = this;
 
     this.subscription = consumer.subscriptions.create("TaskChannel", {
-      connected() {
-      },
       received( { action, task_id, task, notification_title, notification_body } ) {
         switch (action) {
           case "create":
             tasksController.renderTask(task);
-            tasksController.sendNotificationToSuscribers(notification_title, notification_body);
             break;
           case "update":
             tasksController.updateTask(task_id);
-            tasksController.sendNotificationToSuscribers(notification_title, notification_body);
             break;
           case "destroy":
             tasksController.deleteTask(task_id);
@@ -49,12 +45,6 @@ export default class extends Controller {
 
   deleteTask(taskId) {
     this.element.querySelector(`[data-id='${taskId}']`).remove();
-  }
-
-  sendNotificationToSuscribers(title, body) {
-    if(Notification.permission === 'granted') {
-      new Notification(title, { body: body })
-    }
   }
 
 }

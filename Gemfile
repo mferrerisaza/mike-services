@@ -18,7 +18,6 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'mailjet'
 gem 'cloudinary'
-# gem "serviceworker-rails"
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 

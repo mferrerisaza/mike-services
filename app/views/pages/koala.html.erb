@@ -8,11 +8,16 @@
       <% number_of_k += 1 if playing_card.number == "K"%>
       <%= render 'shared/playing-card', playing_card: playing_card, number_of_k: number_of_k %>
     <% end %>
-    <div class="outline" onClick="this.remove();">
+    <div
+      class="outline"
+      data-controller="playing-card"
+      data-action="click->playing-card#remove"
+    >
       <div class="top"><span><%= @cover_card[:number] %></span><span><%== @cover_card[:category] %></span></div>
       <div class="center">
         <p><%= @cover_card[:rule] %></p>
         <h1><%== @cover_card[:category] %></h1>
+        <p></p>
       </div>
       <div class="bottom"><span><%== @cover_card[:category] %></span><span><%= @cover_card[:number] %></span></div>
     </div>

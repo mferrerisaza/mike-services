@@ -6,7 +6,6 @@ import "../components/papelitos.js"
 import "../components/playerTurn.js"
 import "controllers"
 
-
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/service-worker.js', { scope: './' })
     .then(function(reg) {
@@ -14,5 +13,3 @@ if (navigator.serviceWorker) {
       console.log(reg);
     });
 }
-
-Notification.requestPermission().then((result) => {})
