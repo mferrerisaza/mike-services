@@ -50,7 +50,7 @@ export default class extends Controller {
   checkForUndeletedPapers() {
     const undeletedPapers = this.cardTargets.filter((card) => !card.classList.contains("deleted")).length;
     if (undeletedPapers === 0){
-      window.location.replace(this.redirectUrl);
+      Turbolinks.visit(this.redirectUrl);
     }
   }
 
@@ -67,7 +67,7 @@ export default class extends Controller {
     if( this.seconds > 0 ) {
         setTimeout(() => this.tick(), 1000);
     } else {
-      window.location.replace(this.redirectUrl);
+      Turbolinks.visit(this.redirectUrl);
     }
   }
 
