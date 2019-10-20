@@ -1,19 +1,23 @@
-<div class="paper-cards-container">
-  <h4 class="text-center" id="timer">1:00</h3>
-  <div id="stacked-cards-block" class="stackedcards stackedcards--animatable init">
-    <div class="stackedcards-container">
-      <% @papers.each do |paper| %>
-        <div class="card-item" data-paper-id="<%= paper.id %>" data-count="<%= paper.count %>"><%= paper.description %></div>
-      <% end %>
-      <div class="stackedcards--animatable stackedcards-overlay top"></div>
-      <div class="stackedcards--animatable stackedcards-overlay right"><%= @team2.name %></div>
-      <div class="stackedcards--animatable stackedcards-overlay left"><%= @team1.name %></div>
-    </div>
+<div
+  class="paper-cards-container"
+  data-controller="papers"
+  data-papers-team-id="<%= @team1.id %>"
+  data-papers-check-papers-interval=1000
+  data-papers-redirect-url="<%= players_path %>"
+>
+  <h4 class="text-center" id="timer" data-target="papers.timer">1:00</h3>
+  <div class="cards-container">
+    <% @papers.each do |paper| %>
+      <div class="card-item" data-fetch-url="<%= paper_path paper %>" data-count="<%= paper.count %>" data-target="papers.card" >
+        <%= paper.description %>
+      </div>
+    <% end %>
+  </div>
   <div class="global-actions">
-    <div class="left-action" data-team-id="<%= @team1.id %>" ><%= @team1.name %></div>
-    <div class="top-action" >
-      <%= link_to "Volver", players_path, style: "text-decoration: none; color: white;"  %>
+    <div class="action action--left" data-team-id="<%= @team1.id %>" ><%= @team1.name %></div>
+    <div class="action action--center" >
+      <%= link_to "Volver", players_path %>
     </div>
-    <div class="right-action" data-team-id="<%= @team2.id %>"><%= @team2.name %></div>
+    <div class="action action--right" data-team-id="<%= @team2.id %>"><%= @team2.name %></div>
   </div>
 </div>

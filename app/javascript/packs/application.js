@@ -1,10 +1,11 @@
-require("@rails/ujs").start()
-require("channels")
-
+import Rails from '@rails/ujs';
+import Turbolinks from 'turbolinks';
 import "bootstrap";
-import "../components/papelitos.js"
-import "../components/playerTurn.js"
 import "controllers"
+import "channels"
+
+Rails.start();
+Turbolinks.start();
 
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/service-worker.js', { scope: './' })
