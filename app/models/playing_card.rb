@@ -12,7 +12,7 @@ class PlayingCard < ApplicationRecord
     "10": "Mi vagina es:...",
     "J": "Juego",
     "Q": "Regla",
-    "K": "Alimenta al Koala",
+    "K": "Koala",
   }
 
 end
