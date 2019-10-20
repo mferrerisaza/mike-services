@@ -6,10 +6,6 @@ import "../components/papelitos.js"
 import "../components/playerTurn.js"
 import "controllers"
 
-
-window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
-
-
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/service-worker.js', { scope: './' })
     .then(function(reg) {
@@ -17,5 +13,3 @@ if (navigator.serviceWorker) {
       console.log(reg);
     });
 }
-
-Notification.requestPermission().then((result) => {})
