@@ -40,7 +40,7 @@
 </div>
   <div class="footer navbar-fixed-bottom text-center">
     <div class="row">
-      <% if session[:player].nil? %>
+      <% if cookies[:player].blank? %>
         <%= simple_form_for(Player.new) do |f| %>
           <div class="col-xs-6">
             <%=f.input :nickname %>

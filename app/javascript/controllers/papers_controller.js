@@ -1,10 +1,11 @@
 import { Controller } from "stimulus"
-import { Stack } from "swing/src"
+import { Stack, Direction } from "swing/src"
 
 const config = {
   isThrowOut: (coordinateX, coordinateY, targetElement, throwOutConfidence) => {
     return throwOutConfidence > 0.25
-  }
+  },
+  allowedDirections: [Direction.LEFT, Direction.RIGHT]
 };
 
 export default class extends Controller {
@@ -17,6 +18,10 @@ export default class extends Controller {
     this.startTimer();
   }
 
+  disconnect() {
+    clearInterval(this.refreshTimer)
+  }
+
   addCardsToStack() {
     this.stack = new Stack(config);
 
@@ -25,17 +30,18 @@ export default class extends Controller {
     });
 
     this.stack.on('throwout', (event) => {
-      this.updatePaper(event.target);
+      const teamId = event.throwDirection == Direction.LEFT ? this.teamIdLeft : this.teamIdRight;
+      this.updatePaper(event.target, teamId);
     });
   }
 
-  updatePaper(paper) {
+  updatePaper(paper, teamId) {
     fetch(paper.dataset.fetchUrl, {
       method: "PATCH",
       headers: {
          'Content-Type': 'application/json'
        },
-      body: JSON.stringify({ paper: { team_id: parseInt(this.teamId, 10) }  })
+      body: JSON.stringify({ paper: { team_id: parseInt(teamId, 10) }  })
     })
       .then(response => response.json())
       .then((data) => {
@@ -44,7 +50,7 @@ export default class extends Controller {
   };
 
   startCheckingForUndeletedPapers() {
-    setInterval(() => this.checkForUndeletedPapers(), this.checkPapersInterval);
+    this.refreshTimer = setInterval(() => this.checkForUndeletedPapers(), this.checkPapersInterval);
   }
 
   checkForUndeletedPapers() {
@@ -71,8 +77,26 @@ export default class extends Controller {
     }
   }
 
-  get teamId() {
-    return this.data.get("teamId")
+  pointForLeftTeam() {
+    this.throwCardOut(-1000)
+  }
+
+  pointForRightTeam() {
+    this.throwCardOut(1000)
+  }
+
+  throwCardOut(coordinateX) {
+    const topCard  = this.cardTargets.filter((card) => !card.classList.contains("deleted")).slice(-1)[0];
+    const card = this.stack.getCard(topCard)
+    card.throwOut(coordinateX, 0);
+  }
+
+  get teamIdLeft() {
+    return this.data.get("teamIdLeft")
+  }
+
+  get teamIdRight() {
+    return this.data.get("teamIdRight")
   }
 
   get fetchUrl() {

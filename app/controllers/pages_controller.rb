@@ -11,7 +11,6 @@ class PagesController < ApplicationController
   end
 
   def papelitos
-    session[:player] = nil
     path = ""
     unless Team.all.size == 2
       path = new_team_path

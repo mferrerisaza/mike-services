@@ -23,6 +23,7 @@ class TeamsController < ApplicationController
       flash[:notice] = "Habemous equipos, prosiga"
       redirect_to players_path
     else
+      Team.destroy_all
       flash.now[:alert] = "La cagó revise que todos los equipos tengan nombre y no esté repetido"
       render 'new'
     end
@@ -31,6 +32,6 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:team_1, :team_2)
+    params.require(:teams).permit(:team_1, :team_2)
   end
 end

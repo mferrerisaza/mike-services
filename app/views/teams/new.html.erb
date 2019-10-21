@@ -1,16 +1,17 @@
 <div class="container wrapper">
   <%= render 'shared/header', complementary_text: "del entretenimiento" %>
+  <%= link_to reset_papelitos_path do  %>
+    <div class="text-right font-size-12 restart-btn">
+      Reiniciar
+      <i class="fas fa-redo"></i>
+    </div>
+  <% end %>
   <h3 class="text-center font-size-16 font-lighter">Primero crea los equipos:</h3>
-  <%= form_with model: @team, local: true do |f| %>
-    <div class="form-group">
-      <%= f.label :team_1, "Nombre equipo 1" %>
-      <%= f.text_field :team_1, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :team_2, "Nombre equipo 2" %>
-      <%= f.text_field :team_2, class: "form-control" %>
-    </div>
+  <%= simple_form_for :teams, url: teams_path do |f| %>
+    <%= f.input :team_1, label: "Nombre equipo 1" %>
+    <%= f.input :team_2, label: "Nombre equipo 2" %>
     <%= f.submit "Crear Equipos", class: "btn order-more-button" %>
   <% end %>
+
 </div>
 

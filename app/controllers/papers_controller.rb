@@ -12,7 +12,7 @@ class PapersController < ApplicationController
   end
 
   def create
-    player = Player.find(session[:player]["id"])
+    player = Player.find(JSON.parse(cookies[:player])["id"])
     rounds = [1, 2, 3]
     rounds.each do |round|
       Paper.create(description: params[:paper][:paper_1], player: player, count: round)
@@ -29,7 +29,7 @@ class PapersController < ApplicationController
   end
 
   def reset
-    session[:player] = nil
+    cookies[:player] = nil
     Team.destroy_all
     Player.destroy_all
     redirect_to papelitos_path
