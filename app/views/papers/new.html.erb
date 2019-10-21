@@ -4,15 +4,15 @@
   <%= form_with model: Paper.new, local: true do |f| %>
   <div class="form-group">
     <%= f.label :paper_1, "Papelito 1" %>
-    <%= f.text_field :paper_1, class: "form-control" %>
+    <%= f.text_field :paper_1, class: "form-control", autocomplete: "off" %>
   </div>
   <div class="form-group">
     <%= f.label :paper_2, "Papelito 2" %>
-    <%= f.text_field :paper_2, class: "form-control" %>
+    <%= f.text_field :paper_2, class: "form-control", autocomplete: "off" %>
   </div>
   <div class="form-group">
     <%= f.label :paper_3, "Papelito 3" %>
-    <%= f.text_field :paper_3, class: "form-control" %>
+    <%= f.text_field :paper_3, class: "form-control", autocomplete: "off" %>
   </div>
     <%= f.submit "Crear papelitos", class: "btn order-more-button" %>
   <% end %>

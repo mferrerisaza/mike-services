@@ -1,10 +1,10 @@
 <%= simple_form_for task, remote: true do |f| %>
   <%= f.input :status, as: :hidden, input_html: { value: false } %>
   <div class="col-xs-6">
-    <%= f.input :description, label: "¿Qué necesitas?", placeholder: "Ej: Una costeñita" %>
+    <%= f.input :description, label: "¿Qué necesitas?", placeholder: "Ej: Una costeñita", input_html: { autocomplete: "off" } %>
   </div>
   <div class="col-xs-6">
-    <%= f.input :user, label: "¿Quién eres?", placeholder: "Ej: El Mike" %>
+    <%= f.input :user, label: "¿Quién eres?", placeholder: "Ej: El Mike", input_html: { autocomplete: "off" } %>
   </div>
   <div class="col-xs-12">
     <% text_options = %w[#HelpMeMike #AuuidaMike #TirateUn14Mike #HacemeUnCruceMike, #MikeVosQueSosMúsicoHacemeUnFa] %>

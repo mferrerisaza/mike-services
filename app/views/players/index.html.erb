@@ -43,10 +43,10 @@
       <% if cookies[:player].blank? %>
         <%= simple_form_for(Player.new) do |f| %>
           <div class="col-xs-6">
-            <%=f.input :nickname %>
+            <%=f.input :nickname, input_html: { autocomplete: "off" } %>
           </div>
           <div class="col-xs-6">
-            <%= f.association :team %>
+            <%= f.association :team, input_html: { autocomplete: "off" } %>
           </div>
           <div class="col-xs-12">
           <%= f.submit "Agregar", class: "btn order-more-button" %>
