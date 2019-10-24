@@ -1,0 +1,11 @@
+<%= simple_form_for Player.new, remote: true, html: { "data-action": "ajax:success->players#clearForm"   } do |f| %>
+  <div class="col-xs-6">
+    <%=f.input :nickname, input_html: { autocomplete: "off" } %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.association :team, input_html: { autocomplete: "off" } %>
+  </div>
+  <div class="col-xs-12">
+  <%= f.submit "Agregar", class: "btn order-more-button" %>
+  </div>
+<% end %>
