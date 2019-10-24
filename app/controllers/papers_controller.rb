@@ -34,6 +34,7 @@ class PapersController < ApplicationController
     Team.destroy_all
     Player.destroy_all
     redirect_to papelitos_path
+    ActionCable.server.broadcast "player", { action: "game_restart" }
   end
 
   private

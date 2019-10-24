@@ -14,7 +14,11 @@ export default class extends Controller {
             playersController.addPlayer(player, teamId);
             break;
           case "change_player_status":
-            playersController.changePlayerStatus(icon, playerId)
+            playersController.changePlayerStatus(icon, playerId);
+            break;
+          case "game_restart":
+            playersController.deletePlayerCookies();
+            break;
         }
       }
     });
@@ -42,6 +46,11 @@ export default class extends Controller {
     });
 
     return playersReady === this.playerTargets.length ? true : false;
+  }
+
+  deletePlayerCookies() {
+    document.cookie = 'player=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    Turbolinks.visit("/");
   }
 
   teamsReady() {
