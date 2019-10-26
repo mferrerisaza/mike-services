@@ -2,13 +2,13 @@ import { Controller } from "stimulus"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static targets = [ "team", "footer", "addPapersLink", "player", "missingPlayersWarning" ]
+  static targets = [ "team", "footer", "addPapersLink", "player", "round1Link", "round2Link", "round3Link", "newGameLink" ]
 
   connect() {
     let playersController = this;
 
     this.subscription = consumer.subscriptions.create("PlayerChannel", {
-      received( { action, player, teamId, playerId, icon } ) {
+      received( { action, player, teamId, playerId, icon, teamPoints } ) {
         switch (action) {
           case "add_player":
             playersController.addPlayer(player, teamId);
@@ -18,6 +18,24 @@ export default class extends Controller {
             break;
           case "game_restart":
             playersController.deletePlayerCookies();
+            break;
+          case "block_button":
+            playersController.blockBtn();
+            break;
+          case "unblock_button":
+            playersController.unblockBtn();
+            break;
+          case "add_points_to_team":
+            playersController.addPointsToTeam(teamId, teamPoints);
+            break;
+          case "remove_round1_button":
+            playersController.changeFooterContent(playersController.round2LinkTarget.innerHTML);
+            break;
+          case "remove_round2_button":
+            playersController.changeFooterContent(playersController.round3LinkTarget.innerHTML);
+            break;
+          case "remove_round3_button":
+            playersController.changeFooterContent(playersController.newGameLinkTarget.innerHTML);
             break;
         }
       }
@@ -32,8 +50,9 @@ export default class extends Controller {
   changePlayerStatus(icon, playerId) {
     const player = this.playerTargets.filter((player) => parseInt(player.dataset.id, 10) === playerId)[0];
     player.querySelector("i").outerHTML = icon;
+
     if (this.playersReady() && this.teamsReady()) {
-      console.log("lo tenemo")
+      this.footerTarget.innerHTML = this.round1LinkTarget.innerHTML;
     }
   }
 
@@ -67,6 +86,24 @@ export default class extends Controller {
 
   clearForm() {
     this.footerTarget.innerHTML = this.addPapersLinkTarget.innerHTML;
+  }
+
+  blockBtn() {
+    this.footerTarget.querySelector(".order-more-button").classList.add("disabled");
+  }
+
+  unblockBtn() {
+    this.footerTarget.querySelector(".order-more-button").classList.remove("disabled");
+  }
+
+  addPointsToTeam(teamId, teamPoints) {
+    const team = this.teamTargets.filter((team) => parseInt(team.dataset.id, 10) === teamId)[0];
+    const text = teamPoints > 1 ? `(${teamPoints} Puntos )` : `(${teamPoints} Punto )`;
+    team.querySelector(".team-points").innerHTML = text;
+  }
+
+  changeFooterContent(newHTML) {
+    this.footerTarget.innerHTML = newHTML;
   }
 
   disconnect() {

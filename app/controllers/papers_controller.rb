@@ -35,6 +35,7 @@ class PapersController < ApplicationController
     Player.destroy_all
     redirect_to papelitos_path
     ActionCable.server.broadcast "player", { action: "game_restart" }
+    $redis.set("button_changes", 0)
   end
 
   private

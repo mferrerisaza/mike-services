@@ -18,7 +18,7 @@
       <% @teams.each do |team| %>
       <div class="team-card" data-target="players.team" data-id="<%= team.id %>">
           <h3 class="text-center font-size-16 font-bold"><%= team.name %></h3>
-          <h3 class="text-center font-size-16 font-bold mt-0">
+          <h3 class="text-center font-size-16 font-bold mt-0 team-points">
             <%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %>
           </h3>
           <ul class="list-group list-group-flush font-size-13">
@@ -30,14 +30,23 @@
       <% end %>
     </div>
   </div>
+
   <template data-target="players.addPapersLink">
     <%= link_to "Agregar Papelitos", new_paper_path, class: "btn order-more-button"  %>
   </template>
-  <template data-target="players.missingPlayersWarning">
-    <div class="alert alert-warning" role="alert">
-      Faltan Jugadores para esta partida
-    </div>
+  <template data-target="players.round1Link">
+    <%= link_to "Ronda 1: Describir", papers_path(count: 1), class: "btn order-more-button"  %>
   </template>
+  <template data-target="players.round2Link">
+    <%= link_to "Ronda 2: Dramatizar", papers_path(count: 2), class: "btn order-more-button"  %>
+  </template>
+  <template data-target="players.round3Link">
+    <%= link_to "Ronda 3: Solo 1 Palabra", papers_path(count: 3), class: "btn order-more-button"  %>
+  </template>
+  <template data-target="players.newGameLink">
+    <%= link_to "Nueva partida", reset_papelitos_path, class: "btn order-more-button" %>
+  </template>
+
   <div class="footer navbar-fixed-bottom text-center" data-target="players.footer">
     <div class="row">
       <% if cookies[:player].blank? %>
