@@ -19,6 +19,7 @@ class PapersController < ApplicationController
       Paper.create(description: params[:paper][:paper_2], player: player, count: round)
       Paper.create(description: params[:paper][:paper_3], player: player, count: round)
     end
+    change_player_status(player.id)
     redirect_to players_path
   end
 
@@ -33,11 +34,21 @@ class PapersController < ApplicationController
     Team.destroy_all
     Player.destroy_all
     redirect_to papelitos_path
+    ActionCable.server.broadcast "player", { action: "game_restart" }
+    $redis.set("button_changes", 0)
   end
 
   private
 
   def paper_params
     params.require(:paper).permit(:team_id, :count)
+  end
+
+  def change_player_status(player_id)
+    ActionCable.server.broadcast "player", {
+      action: "change_player_status",
+      icon: "<i class='em em-white_check_mark'></i>",
+      playerId: player_id
+    }
   end
 end

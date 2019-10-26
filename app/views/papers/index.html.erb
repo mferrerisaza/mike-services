@@ -16,7 +16,7 @@
   </div>
   <div class="global-actions">
     <div class="action action--left" data-action="click->papers#pointForLeftTeam"><%= @team1.name %></div>
-    <div class="action action--center" >
+    <div class="action action--center" data-action="click->papers#unblockButtonOnClients" >
       <%= link_to "Volver", players_path %>
     </div>
     <div class="action action--right" data-action="click->papers#pointForRightTeam"><%= @team2.name %></div>

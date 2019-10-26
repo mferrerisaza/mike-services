@@ -22,7 +22,6 @@
   font-size: 24px;
   font-weight: bold;
   width: 90%;
-  // height: 80vh;
   text-align: center;
   padding: 10px;
   margin: 10px auto;
@@ -41,5 +40,5 @@
   align-items: center;
 }
 .top{ text-align: left; height: 10%; }
-.bottom{ text-align: right;height: 10%; }
+.bottom{ text-align: left; height: 10%; transform: rotate(180deg); }
 .red { color: #cc0033}

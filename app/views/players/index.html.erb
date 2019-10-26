@@ -1,57 +1,56 @@
-<div class="container wrapper">
-  <%= render 'shared/header', complementary_text: "del entretenimiento" %>
-  <%= link_to reset_papelitos_path do  %>
-    <div class="text-right font-size-12 restart-btn">
-      Reiniciar
-      <i class="fas fa-redo"></i>
-    </div>
-  <% end %>
-  <h3 class="text-center font-size-16 font-lighter mt-8">
-    <% if @teams_ready %>
-      Acá verás los resultados
-    <% else %>
-      Agrega los jugadores a cada equipo:
+<div class="players-wrapper" data-controller="players">
+  <div class="container wrapper">
+    <%= render 'shared/header', complementary_text: "del entretenimiento" %>
+    <%= link_to reset_papelitos_path do  %>
+      <div class="text-right font-size-12 restart-btn">
+        Reiniciar
+        <i class="fas fa-redo"></i>
+      </div>
     <% end %>
-  </h3>
-  <div class="team-cards-container">
-    <% @teams.each do |team| %>
-    <div class="team-card">
-        <h3 class="text-center font-size-16 font-bold"><%= team.name %></h3>
-        <h3 class="text-center font-size-16 font-bold mt-0">
-          <%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %>
-        </h3>
-        <ul class="list-group list-group-flush font-size-13">
-          <% team.players.each do |player| %>
-            <li data-player-id ="<%= player.id %>"
-                class="list-group-item"
-            >
-              <%= player.nickname %>
-              <% if player.ready_to_play? %>
-                <i class="em em-white_check_mark"></i>
-              <% else %>
-                <i class="em em-x"></i>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+    <h3 class="text-center font-size-16 font-lighter mt-8">
+      <% if @teams_ready %>
+        Acá verás los resultados
+      <% else %>
+        Agrega los jugadores a cada equipo:
+      <% end %>
+    </h3>
+    <div class="team-cards-container">
+      <% @teams.each do |team| %>
+      <div class="team-card" data-target="players.team" data-id="<%= team.id %>">
+          <h3 class="text-center font-size-16 font-bold"><%= team.name %></h3>
+          <h3 class="text-center font-size-16 font-bold mt-0 team-points">
+            <%= "(#{pluralize(team.points, "Punto", "Puntos")} )" if team.points.positive? %>
+          </h3>
+          <ul class="list-group list-group-flush font-size-13">
+            <% team.players.each do |player| %>
+              <%= render 'shared/player-card', player: player %>
+            <% end %>
+          </ul>
+      </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
-</div>
-  <div class="footer navbar-fixed-bottom text-center">
+
+  <template data-target="players.addPapersLink">
+    <%= link_to "Agregar Papelitos", new_paper_path, class: "btn order-more-button"  %>
+  </template>
+  <template data-target="players.round1Link">
+    <%= link_to "Ronda 1: Describir", papers_path(count: 1), class: "btn order-more-button"  %>
+  </template>
+  <template data-target="players.round2Link">
+    <%= link_to "Ronda 2: Dramatizar", papers_path(count: 2), class: "btn order-more-button"  %>
+  </template>
+  <template data-target="players.round3Link">
+    <%= link_to "Ronda 3: Solo 1 Palabra", papers_path(count: 3), class: "btn order-more-button"  %>
+  </template>
+  <template data-target="players.newGameLink">
+    <%= link_to "Nueva partida", reset_papelitos_path, class: "btn order-more-button" %>
+  </template>
+
+  <div class="footer navbar-fixed-bottom text-center" data-target="players.footer">
     <div class="row">
       <% if cookies[:player].blank? %>
-        <%= simple_form_for(Player.new) do |f| %>
-          <div class="col-xs-6">
-            <%=f.input :nickname, input_html: { autocomplete: "off" } %>
-          </div>
-          <div class="col-xs-6">
-            <%= f.association :team, input_html: { autocomplete: "off" } %>
-          </div>
-          <div class="col-xs-12">
-          <%= f.submit "Agregar", class: "btn order-more-button" %>
-          </div>
-        <% end %>
+        <%= render 'shared/player-form' %>
       <% elsif @users_ready  && @papers_round1.size > 0 && @teams_ready %>
         <%= link_to "Ronda 1: Describir", papers_path(count: 1), class: "btn order-more-button"  %>
       <% elsif @users_ready  && @papers_round2.size > 0 && @teams_ready %>
@@ -69,3 +68,5 @@
       <% end %>
     </div>
   </div>
+
+</div>

@@ -14,11 +14,23 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     if @player.save
-      redirect_to players_path
       cookies[:player] = { value: @player.to_json, expires: 12.hours }
+      respond_to do |format|
+        format.html {
+          redirect_to players_path
+        }
+      end
     else
-      @teams = Team.all
-      render 'index'
+      respond_to do |format|
+        format.html {
+          @teams = Team.all
+          render 'index'
+        }
+        format.js {
+          render json: { errors: @player.errors,},
+                status: :unprocessable_entity
+        }
+      end
     end
   end
 

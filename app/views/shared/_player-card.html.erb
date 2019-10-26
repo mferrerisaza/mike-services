@@ -1,0 +1,8 @@
+<li data-id ="<%= player.id %>" data-target="players.player" class="list-group-item">
+  <%= player.nickname %>
+  <% if player.ready_to_play? %>
+    <i class="em em-white_check_mark"></i>
+  <% else %>
+    <i class="em em-x"></i>
+  <% end %>
+</li>
